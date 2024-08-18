@@ -7,8 +7,21 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
 import { TestMiddleware } from './middleware/test.middleware';
 import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionsFilter } from './exceptions/all-exception.filter';
+import { ConfigModule } from '@nestjs/config';
+import { EmployeeModule } from './employee/employee.module';
+import { DatabaseModule } from './configs/database/database.module';
+import { UserModule } from './users/user.module';
 @Module({
-  imports: [CatsModule, DogsModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    DatabaseModule,
+    UserModule,
+    CatsModule,
+    DogsModule,
+    EmployeeModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
